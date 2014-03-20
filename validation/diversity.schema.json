@@ -58,7 +58,7 @@
       "description": "Dependencies are given with component name as key, and version or URL as value.",
       "type": "object",
       "patternProperties": {
-        "^[a-zA-Z0-9-_]+$": {
+        "^[a-zA-Z0-9_-]+$": {
           "type": "string",
           "oneOf": [
             {
@@ -79,7 +79,7 @@
       "type":        "object",
       "properties": {
         "admin": {
-          "description": "potfile for admin strings: translatable strings in tws.json and option schema.",
+          "description": "potfile for admin strings: translatable strings in diversity.json and option schema.",
           "$ref":        "#/definitions/filename",
           "pattern":     "\\.pot$"
         },
@@ -143,7 +143,7 @@
     "options": {
       "description": "Either a filename of a JSON Schema, or the JSON Schema included directly.",
       "oneOf": [
-        { "$ref": "http://json-schema.org/draft-04/hyper-schema#" },
+        { "$ref": "http://json-schema.org/draft-04/schema#" },
         { "$ref": "#/definitions/filename" }
       ]
     },
@@ -210,6 +210,6 @@
   "definitions": {
     "semver":    { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
     "pageTypes": { "type": "string", "enum": [ "article", "articlegroup", "checkout", "basket", "custom", "start", "search" ] },
-    "filename":  { "type": "string", "pattern": "[^/?*:;{}\\]+$", "format": "filename" }
+    "filename":  { "type": "string", "pattern": "[^/?*:;{}\\\\]+$", "format": "filename" }
   }
 }
