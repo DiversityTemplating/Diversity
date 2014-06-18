@@ -42,11 +42,6 @@
     },
 
     "script": {
-      "description": "JS filename, relative base dir.",
-      "$ref":        "#/definitions/filename"
-    },
-
-    "script": {
       "description": "JS filename or array of filenames, relative base dir.",
       "oneOf": [
         { "$ref": "#/definitions/filename" },
