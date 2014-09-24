@@ -8,6 +8,8 @@ Here we are going to go through the schema piece by piece and explain the
 different parts.
 
   1. [Name](#name)
+  1. [Version](#version)
+  1. [Grouping](#grouping)
   1. [Template](#template)
   1. [Style](#style)
   1. [Script](#script)
@@ -27,7 +29,23 @@ different parts.
 
 ```diversity.json``` is a always an object.
 
-### Basics: Name and version
+**Name** is the name of the component, should be unique and can contain the letters,
+underscore and hyphen (actually minus sign).
+
+```json
+{
+  "name": "my-awesome-cmpnt"
+}
+```
+
+
+### Version
+**version** property is a string with the components version number.
+
+The version should follow the [semamtic version](http://semver.org/) standard,
+i.e. ```MAJOR.MINOR.PATCH```.  
+
+Ex "0.2.0", "1.0.3", "0.107.0"
 
 ```json
 {
@@ -36,13 +54,18 @@ different parts.
 }
 ```
 
-**Name** is the name of the component, should be unique and can contain the letters,
-underscore and hyphen (actually minus sign).
 
-The version should follow the [semamtic version](http://semver.org/) standard,
-i.e. ```MAJOR.MINOR.PATCH```.  
+### Grouping
+**grouping** is a list of names of "groups" or "tags" this component conceptually belongs to. This
+is used for sorting and choosing what component can go where.
 
-Ex "0.2.0", "1.0.3", "0.107.0"
+```json
+{
+  "name": "my-awesome-cmpnt",
+  "version": "0.2.12",
+  "grouping": ["article", "inline"]
+}
+```
 
 
 ### Template

@@ -15,6 +15,14 @@
       "$ref":        "#/definitions/semver"
     },
 
+    "grouping": {
+      "description": "List of groups this component belongs to.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+
     "template": {
       "description": "HTML (mustache) filename, relative base dir.  The file must exist in component directory.",
       "anyOf": [
