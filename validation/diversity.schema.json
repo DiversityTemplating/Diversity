@@ -112,20 +112,6 @@
       }
     },
 
-    "type": {
-      "description": "Component type: is this a template, page or object?",
-      "type": "string",
-      "enum": [ "template", "page", "object" ]
-    },
-
-    "pageType": {
-      "description": "Should this component only be rendered on certain types of pages?",
-      "oneOf": [
-        { "type": "string", "$ref": "#/definitions/pageType" },
-        { "type": "array", "items": { "$ref": "#/definitions/pageType" } }
-      ]
-    },
-
     "context": {
       "description": "API queries to feed to mustache, in JSON-RPC 2.0-format (omitting id and jsonrpc keys).",
       "type":        "object",
@@ -139,12 +125,23 @@
       }
     },
 
-    "options": {
+    "settings": {
       "description": "Either a filename of a JSON Schema, or the JSON Schema included directly.",
       "oneOf": [
         { "$ref": "http://json-schema.org/draft-04/schema#" },
         { "$ref": "#/definitions/filename" }
       ]
+    },
+
+    "settingsForm": {
+      "description": "A form defintion for the settings schema",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          { "type": "string" },
+          { "type": "object", "additionalProperties": true }
+        ]
+      }
     },
 
     "angular": {
@@ -153,31 +150,6 @@
         { "type": "boolean", "enum": [true] },
         { "type": "string" }
       ]
-    },
-
-    "partials": {
-      "description": "An object with filenames of mustache partials.  The keyes will be fed to mustache.",
-      "type":        "object",
-      "additionalProperties": { "$ref": "#/definitions/filename" }
-    },
-
-    "themes": {
-      "description": "A list of CSS files.  Admin will chose one of them, the first being default.",
-      "type":        "array",
-      "items": { "$ref": "#/definitions/filename" }
-    },
-
-    "fields": {
-      "description": "If other objects can be inserted, this is an object with field specifications, each key will be fed to mustache with an array of rendered HTML.",
-      "type":        "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "title":       { "type": "string" },
-          "description": { "type": "string" }
-        },
-        "required": ["title"]
-      }
     },
 
     "title": {
@@ -195,12 +167,8 @@
       "description": "URL to thumbnail (for administration gui).",
       "type":        "string",
       "format":      "uri"
-    },
-
-    "assetDir": {
-      "description": "The directory holding assets that should be client-side available under assetUrl",
-      "$ref":        "#/definitions/filename"
     }
+
   },
 
   "required":             ["name", "version"],

@@ -14,14 +14,10 @@ different parts.
   1. [Dependencies](#dependencies)
   1. [i18n](#i18n)
   1. [l10n](#l10n)
-  1. [Type](#type)
-  1. [PageType](#pagetype)
   1. [Context](#context)
-  1. [Options](#options)
+  1. [Settings](#settings)
+  1. [Settings Form](#settings-form)
   1. [Angular](#angular)
-  1. [Partials](#partials)
-  1. [Theme](#theme)
-  1. [Fields](#fields)
   1. [Title](#title)
   1. [Description](#description)
   1. [Thumbnail](#thumbnail)
@@ -210,23 +206,6 @@ This value is optional.
       }
     },
 
-### Type
-
-**Type** should be a string and can be either ```"template"```, ```"page"```
-or ```"object"```.
-
-TODO: Explain the different type.
-
-This value is optional.
-
-
-### PageType
-
-**pageType** is either a string or a list of strings that define which types of
-pages this component can be rendered inside of.
-
-This value is optional.
-
 
 ### Context
 
@@ -253,13 +232,13 @@ Ex.
 ```
 
 
-### Options
+### Settings
 
-**options** is a JSON Schema that defines what options this component exposes to
-the user. An object **options** is a availiable when rendering the mustache
-template.  
+**settings** is a JSON Schema that defines what settings this component exposes to
+the user. An object **settings** is a available when rendering the mustache
+template.
 
-**options** can be either a string with file path to the schema or the actual
+**settings** can be either a string with file path to the schema or the actual
 schema inlined.
 
 This value is optional.
@@ -268,7 +247,7 @@ This value is optional.
 ```json
 {
   [...]
-  "options": {
+  "settings": {
     "type": "object",
     "properties": {
       "size": {
@@ -281,6 +260,36 @@ This value is optional.
 }
 ```
 
+### Settings Form
+The **settings** JSON Schema is used as a basis for the administration gui. But the schema alone
+does not have all the info needed to produce a good UI. For instance is this *string* an input or
+a textarea? **settingsForm** includes a *form definition*, which is a list of extra options in the
+format that [Angular Schema Form](https://github.com/Textalk/angular-schema-form) uses.
+
+This value is optional.
+
+
+```json
+{
+  [...]
+  "settings": {
+    "type": "object",
+    "properties": {
+      "comment": {
+        "title": "Comment",
+        "type": "string"
+      }
+    }
+  },
+  "settingsForm": [
+    {
+      "key": "comment",
+      "type": "textarea"
+
+    }
+  ]
+}
+```
 
 
 ### Angular
@@ -307,45 +316,6 @@ This value is optional.
   "angular": "myAwesomeCmpnt"
 }
 ```
-
-### Partials
-
-TODO
-    "partials": {
-      "description": "An object with filenames of mustache partials.  The keyes will be fed to mustache.",
-      "type":        "object",
-      "additionalProperties": { "$ref": "#/definitions/filename" }
-    },
-
-### Themes
-
-TODO.
-Question: Maybea options should handle this instead?
-
-    "themes": {
-      "description": "A list of CSS files.  Admin will chose one of them, the first being default.",
-      "type":        "array",
-      "items": { "$ref": "#/definitions/filename" }
-    },
-
-
-### Fields
-
-TODO
-
-    "fields": {
-      "description": "If other objects can be inserted, this is an object with field specifications, each key will be fed to mustache with an array of rendered HTML.",
-      "type":        "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "title":       { "type": "string" },
-          "description": { "type": "string" }
-        },
-        "required": ["title"]
-      }
-    },
-
 
 ### Title
 
