@@ -1,0 +1,16 @@
+{
+  "component": "layout",
+  "settings": {
+    "components": [
+      {
+        "component": "tws-custom-html",
+        "settings": {
+          "custom_html": {
+            "sv": "Hej världen",
+            "en": "Hello world"
+          }
+        }
+      }
+    ]
+  }
+}

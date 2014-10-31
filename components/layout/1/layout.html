@@ -1,11 +1,29 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
   <head>
-    <title>{{options.title}}</title>
-  </head>
-  <body>
-    <h1>{{options.title}}</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    Hello world.
+    {{#styles}}
+      <link rel="stylesheet" href="{{{.}}}" media="screen" charset="utf-8">
+    {{/styles}}
+
+    {{#settings.custom_css.links}}
+      <link rel="stylesheet" href="{{{.}}}" media="screen" charset="utf-8">
+    {{/settings.custom_css.links}}
+  </head>
+  <body style="background: grey">
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0/angular.js"></script>
+    <script src="//code.angularjs.org/1.3.0/angular-sanitize.min.js"></script>
+
+    <div class="container" style="background: white;">
+      {{#settings.components}}
+        <div>{{{componentHTML}}}</div>
+      {{/settings.components}}
+    </div>
+
+    {{#scripts}}
+      <script src="{{{.}}}"></script>
+    {{/scripts}}
   </body>
 </html>

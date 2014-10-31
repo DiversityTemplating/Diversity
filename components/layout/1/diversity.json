@@ -2,7 +2,19 @@
   "name":     "layout",
   "version":  "1.0.0",
   "template": "layout.html",
-  "prerequisites": {
-
+  "settings": {
+    "type": "object",
+    "properties": {
+      "components": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "format": "diversity"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "tws-bootstrap": ">=0.0.1"
   }
 }
