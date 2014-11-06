@@ -11,7 +11,7 @@ class DiversityWeb < Sinatra::Base #Sinatra::Application
 
   #enable :reloader, :sessions, :dump_errors
 
-  set :root, File.dirname(__FILE__)
+  set :root, File.dirname(File.dirname(__FILE__))
 
   configure :development do
     enable :dump_errors
@@ -52,24 +52,24 @@ class DiversityWeb < Sinatra::Base #Sinatra::Application
 
     filename = File.join(settings.root, 'site', path)
 
-    halt 404 unless File.exist?(filename)
+    if File.exist?("#{filename}.json")
+      puts "Rendering diversity from json: #{filename}.json."
+      context = { "language" => "en" }
+      settings = JSON.parse(File.read("#{filename}.json"))
 
+      # @todo Registries must really have a super-registry factory...
+      component = @local_registry.get_component(settings['component'])
 
-    puts "File #{File.join(settings.root, path)} exists."
+      unless component
+        puts "No local component #{settings['component']}\n"
+        component = @registry.get_component(settings['component'])
+      end
 
-    context = { "language" => "en" }
-
-    settings = JSON.parse(File.read(filename))
-
-    # @todo Registries must really have a super-registry...
-    component = @local_registry.get_component(settings['component'])
-
-    unless component
-      puts "No local component #{settings['component']}\n"
-      component = @registry.get_component(settings['component'])
+      @engine.render(component, context, settings['settings'])
+    else
+      puts "No such file: #{filename}.json."
+      halt 404 unless File.exist?(filename)
     end
-
-    @engine.render(component, context, settings['settings'])
   end
 
   run! if app_file == $0

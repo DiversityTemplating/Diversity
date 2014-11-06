@@ -1,0 +1,19 @@
+{
+  "component": "layout",
+  "settings": {
+    "components": [
+      {
+        "component": "tws-admin-schema-form"
+      },
+      {
+        "component": "tws-custom-html",
+        "settings": {
+          "custom_html": {
+            "sv": "Hej världen",
+            "en": "<script>\n\n</script>\n<div ng-controller=\"FormController\"><form sf-schema=\"schema\" sf-form=\"form\" sf-model=\"model\"></form></div>"
+          }
+        }
+      }
+    ]
+  }
+}
