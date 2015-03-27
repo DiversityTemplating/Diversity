@@ -29,10 +29,24 @@ Terminology
     Specification or referenced by a URL)
 
 
-Rendering a component
----------------------
+Rendering from Settings
+-----------------------
 
-Collect the `hash` (so named in https://mustache.github.io/mustache.5.html):
+The `settings` object is of `"format": "diversity"`.  That means it has `component`, possibly
+`version`, and again, `settings`.  Get the Component of that version.
+
+The mustache template is an Asset from the Component, named `template` in the Specification.
+
+The mustache `hash` (so named in https://mustache.github.io/mustache.5.html) consists of these keys:
+
+  * language
+  * context
+  * settings
+  * settingsJSON
+  * angularBootstrp **deprecated**
+  * scripts **deprecated**
+  * styles **deprecated**
+  * lang
 
 
 ### language
@@ -100,11 +114,8 @@ The settings should be available to the mustache rendering.
 #### Subrendering format diversity
 
 If an (sub-)object in `settings` matches a property with `"format": "diversity"` in the schema,
-that object should be treated as a base `settings` and fed into the rendering.  The object must
-have the key `component`, saying which component should be rendered.  It might have `version` - a
-semver version specification, and it might have `settings` that will be fed into rendering of THAT
-component.  The resulting HTML of this rendering shall be added to `componentHTML` in this same
-object.
+that object should be treated as a base `settings` and fed into the rendering recursively.  The
+resulting HTML of this rendering shall be added to `componentHTML` in this same object.
 
 Note that this must be done for places in the schema defined by `properties`,
 `additionalProperties` and `items`.
